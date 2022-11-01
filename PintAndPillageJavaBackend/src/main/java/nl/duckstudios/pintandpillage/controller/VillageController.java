@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.exceptions.SettleConditionsNotMetException;
 import nl.duckstudios.pintandpillage.dao.VillageDAO;
 import nl.duckstudios.pintandpillage.entity.Coord;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/village")
+@RequiredArgsConstructor
 public class VillageController {
 
     private final VillageFactory villageFactory;
@@ -31,19 +33,6 @@ public class VillageController {
     private final VillageService villageService;
 
     private final WorldService worldService;
-
-    public VillageController(VillageFactory villageFactory, VillageDAO villageDAO,
-                             AuthenticationService authenticationService,
-                             AccountService accountService,
-                             VillageService villageService,
-                             WorldService worldService) {
-        this.villageFactory = villageFactory;
-        this.villageDAO = villageDAO;
-        this.authenticationService = authenticationService;
-        this.accountService = accountService;
-        this.villageService = villageService;
-        this.worldService = worldService;
-    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

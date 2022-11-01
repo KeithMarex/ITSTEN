@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.dao;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.Building;
@@ -13,13 +14,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class VillageDataMapper {
 
     private final VillageDAO villageDAO;
-
-    public VillageDataMapper(VillageDAO villageDAO) {
-        this.villageDAO = villageDAO;
-    }
 
     public Village getVillage(long id) throws EntityNotFoundException {
         Village village = villageDAO.getVillage(id).stream()

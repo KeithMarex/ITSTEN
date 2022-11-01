@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.User;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.Building;
@@ -15,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("api/building")
+@RequiredArgsConstructor
 public class BuildingController {
 
     private final VillageService villageService;
@@ -22,18 +24,6 @@ public class BuildingController {
     private final AuthenticationService authenticationService;
     private final AccountService accountService;
     private final BuildingFactory buildingFactory;
-
-    public BuildingController(VillageService villageService,
-                              BuildingService buildingService,
-                              AuthenticationService authenticationService,
-                              AccountService accountService,
-                              BuildingFactory buildingFactory) {
-        this.villageService = villageService;
-        this.buildingService = buildingService;
-        this.authenticationService = authenticationService;
-        this.accountService = accountService;
-        this.buildingFactory = buildingFactory;
-    }
 
     @RequestMapping(value = "/build", method = RequestMethod.POST)
     @ResponseBody

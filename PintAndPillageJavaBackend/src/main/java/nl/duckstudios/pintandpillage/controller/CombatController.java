@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.exceptions.AttackingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.dao.TravelDao;
 import nl.duckstudios.pintandpillage.entity.Coord;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/combat")
+@RequiredArgsConstructor
 public class CombatController {
 
     private final AuthenticationService authenticationService;
@@ -27,15 +29,6 @@ public class CombatController {
 
     private final TravelDao travelDao;
     private final DistanceService distanceService;
-
-    public CombatController(AuthenticationService authenticationService, AccountService accountService, VillageService villageService, CombatService combatService, TravelDao travelDao, DistanceService distanceService) {
-        this.authenticationService = authenticationService;
-        this.accountService = accountService;
-        this.villageService = villageService;
-        this.combatService = combatService;
-        this.travelDao = travelDao;
-        this.distanceService = distanceService;
-    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

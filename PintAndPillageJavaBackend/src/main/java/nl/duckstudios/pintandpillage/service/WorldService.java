@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.dao.VillageDataMapper;
 import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.User;
@@ -11,15 +12,11 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
 @Service
+@RequiredArgsConstructor
 public class WorldService {
 
     private final VillageDataMapper villageDataMapper;
     private final DistanceService distanceService;
-
-    public WorldService(VillageDataMapper villageDataMapper, DistanceService distanceService) {
-        this.villageDataMapper = villageDataMapper;
-        this.distanceService = distanceService;
-    }
 
     public WorldMap getWorldMap() {
         WorldMap worldMap = new WorldMap(34843, 50, 50, 25);

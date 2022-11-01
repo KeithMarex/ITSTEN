@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.dao.UserDAO;
 import nl.duckstudios.pintandpillage.entity.User;
 import nl.duckstudios.pintandpillage.model.UserHighscore;
@@ -11,15 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class HighscoreService {
 
     private final UserDAO userDAO;
     private final VillageService villageService;
-
-    public HighscoreService(UserDAO userDAO, VillageService villageService) {
-        this.userDAO = userDAO;
-        this.villageService = villageService;
-    }
 
     public List<UserHighscore> getHighscore() {
         List<UserHighscore> highscores = new ArrayList<>();

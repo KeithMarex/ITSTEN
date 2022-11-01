@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.User;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.ProductionBuilding;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/production")
+@RequiredArgsConstructor
 public class ProductionController {
 
     private final VillageService villageService;
@@ -22,17 +24,6 @@ public class ProductionController {
     private final AccountService accountService;
 
     private final UnitFactory unitFactory;
-
-    public ProductionController(VillageService villageService, BuildingService buildingService,
-                                AuthenticationService authenticationService,
-                                AccountService accountService,
-                                UnitFactory unitFactory) {
-        this.villageService = villageService;
-        this.buildingService = buildingService;
-        this.authenticationService = authenticationService;
-        this.accountService = accountService;
-        this.unitFactory = unitFactory;
-    }
 
     @RequestMapping(value = "train", method = RequestMethod.POST)
     @ResponseBody

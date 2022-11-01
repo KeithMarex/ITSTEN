@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.exceptions.SettleConditionsNotMetException;
 import nl.duckstudios.pintandpillage.dao.VillageDataMapper;
 import nl.duckstudios.pintandpillage.entity.Coord;
@@ -22,20 +23,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class VillageService {
 
     private final VillageDataMapper villageDataMapper;
     private final ResourceManager resourceManager;
-
     private final WorldService worldService;
     private final DistanceService distanceService;
-
-    public VillageService(VillageDataMapper villageDataMapper, ResourceManager resourceManager, WorldService worldService, DistanceService distanceService) {
-        this.villageDataMapper = villageDataMapper;
-        this.resourceManager = resourceManager;
-        this.worldService = worldService;
-        this.distanceService = distanceService;
-    }
 
     public Village getVillage(long id) throws EntityNotFoundException {
         Village village = villageDataMapper.getVillage(id);
