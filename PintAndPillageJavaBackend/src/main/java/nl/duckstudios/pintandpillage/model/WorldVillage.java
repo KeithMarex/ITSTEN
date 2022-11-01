@@ -1,8 +1,9 @@
 package nl.duckstudios.pintandpillage.model;
 
+import lombok.AllArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.Coord;
 
-
+@AllArgsConstructor
 public class WorldVillage {
     public long villageId;
 
@@ -16,12 +17,4 @@ public class WorldVillage {
 
     public long userId;
 
-    public WorldVillage(long villageId, String villageOwnerName, Coord position, String name, long userId, int points) {
-        this.villageId = villageId;
-        this.villageOwnerName = villageOwnerName;
-        this.position = position;
-        this.name = name;
-        this.userId = userId;
-        this.points = points;
-    }
 }

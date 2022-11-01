@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.User;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.ResearchBuilding;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/research")
+@RequiredArgsConstructor
 public class ResearchController {
 
     private final VillageService villageService;
@@ -22,17 +24,6 @@ public class ResearchController {
     private final AccountService accountService;
 
     private final ResearchFactory researchFactory;
-
-    public ResearchController(VillageService villageService, BuildingService buildingService,
-                              AuthenticationService authenticationService,
-                              AccountService accountService,
-                              ResearchFactory researchFactory) {
-        this.villageService = villageService;
-        this.buildingService = buildingService;
-        this.authenticationService = authenticationService;
-        this.accountService = accountService;
-        this.researchFactory = researchFactory;
-    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody

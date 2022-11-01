@@ -1,18 +1,16 @@
 package nl.duckstudios.pintandpillage.dao;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class UserDAO {
 
     private final UserRepository userRepository;
-
-    public UserDAO(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
