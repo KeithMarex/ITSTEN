@@ -1,4 +1,4 @@
-package nl.duckstudios.pintandpillage.Exceptions;
+package nl.duckstudios.pintandpillage.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

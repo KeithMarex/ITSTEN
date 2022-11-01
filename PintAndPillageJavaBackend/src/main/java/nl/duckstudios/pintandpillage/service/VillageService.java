@@ -1,6 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
-import nl.duckstudios.pintandpillage.Exceptions.SettleConditionsNotMetException;
+import nl.duckstudios.pintandpillage.exceptions.SettleConditionsNotMetException;
 import nl.duckstudios.pintandpillage.dao.VillageDataMapper;
 import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.Village;

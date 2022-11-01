@@ -1,11 +1,11 @@
-package nl.duckstudios.pintandpillage.Exceptions;
+package nl.duckstudios.pintandpillage.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-public class NotExistingEntityException extends RuntimeException {
-    public NotExistingEntityException(String message) {
+public class SettleConditionsNotMetException extends RuntimeException {
+    public SettleConditionsNotMetException(String message) {
         super(message);
     }
 }

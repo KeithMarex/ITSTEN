@@ -1,6 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
-import nl.duckstudios.pintandpillage.Exceptions.UnauthorizedException;
+import nl.duckstudios.pintandpillage.exceptions.UnauthorizedException;
 import nl.duckstudios.pintandpillage.entity.Village;
 import org.springframework.stereotype.Service;
 

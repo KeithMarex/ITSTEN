@@ -1,4 +1,4 @@
-package nl.duckstudios.pintandpillage.Exceptions;
+package nl.duckstudios.pintandpillage.exceptions;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

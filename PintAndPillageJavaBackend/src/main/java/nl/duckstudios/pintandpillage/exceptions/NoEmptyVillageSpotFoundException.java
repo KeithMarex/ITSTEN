@@ -1,4 +1,4 @@
-package nl.duckstudios.pintandpillage.Exceptions;
+package nl.duckstudios.pintandpillage.exceptions;
 
 public class NoEmptyVillageSpotFoundException extends RuntimeException {
     public NoEmptyVillageSpotFoundException(String message) {

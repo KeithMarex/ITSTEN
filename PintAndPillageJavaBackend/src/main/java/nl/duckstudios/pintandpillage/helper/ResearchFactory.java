@@ -1,6 +1,6 @@
 package nl.duckstudios.pintandpillage.helper;
 
-import nl.duckstudios.pintandpillage.Exceptions.NotExistingEntityException;
+import nl.duckstudios.pintandpillage.exceptions.NotExistingEntityException;
 import nl.duckstudios.pintandpillage.entity.researching.*;
 import org.springframework.stereotype.Component;
 

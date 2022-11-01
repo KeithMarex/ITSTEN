@@ -1,6 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
-import nl.duckstudios.pintandpillage.Exceptions.AttackingConditionsNotMetException;
+import nl.duckstudios.pintandpillage.exceptions.AttackingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.VillageUnit;
 import nl.duckstudios.pintandpillage.entity.production.Scout;

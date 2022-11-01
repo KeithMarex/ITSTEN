@@ -2,7 +2,7 @@ package nl.duckstudios.pintandpillage.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.duckstudios.pintandpillage.Exceptions.NoEmptyVillageSpotFoundException;
+import nl.duckstudios.pintandpillage.exceptions.NoEmptyVillageSpotFoundException;
 import nl.duckstudios.pintandpillage.model.Tile;
 import nl.duckstudios.pintandpillage.model.TileType;
 import nl.duckstudios.pintandpillage.model.WorldVillage;

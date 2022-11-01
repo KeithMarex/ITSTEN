@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
-import nl.duckstudios.pintandpillage.Exceptions.BuildingConditionsNotMetException;
+import nl.duckstudios.pintandpillage.exceptions.BuildingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.helper.ResourceManager;

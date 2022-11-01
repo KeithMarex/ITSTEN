@@ -1,9 +1,9 @@
 package nl.duckstudios.pintandpillage.controller;
 
-import nl.duckstudios.pintandpillage.Exceptions.ForbiddenException;
-import nl.duckstudios.pintandpillage.Exceptions.UnmetEmailRequirementsException;
-import nl.duckstudios.pintandpillage.Exceptions.UnmetPasswordRequirementsException;
-import nl.duckstudios.pintandpillage.Exceptions.UserAlreadyExistsException;
+import nl.duckstudios.pintandpillage.exceptions.ForbiddenException;
+import nl.duckstudios.pintandpillage.exceptions.UnmetEmailRequirementsException;
+import nl.duckstudios.pintandpillage.exceptions.UnmetPasswordRequirementsException;
+import nl.duckstudios.pintandpillage.exceptions.UserAlreadyExistsException;
 import nl.duckstudios.pintandpillage.config.JwtTokenUtil;
 import nl.duckstudios.pintandpillage.dao.UserDAO;
 import nl.duckstudios.pintandpillage.entity.User;
