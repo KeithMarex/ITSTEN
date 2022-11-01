@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class VillageDAO {
@@ -19,8 +20,8 @@ public class VillageDAO {
         return this.villageRepository.save(village);
     }
 
-    public Village getVillage(long id) throws EntityNotFoundException {
-        return this.villageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    public Optional<Village> getVillage(long id) {
+        return this.villageRepository.findById(id);
     }
 
     public List<Village> getVillages(long id) {

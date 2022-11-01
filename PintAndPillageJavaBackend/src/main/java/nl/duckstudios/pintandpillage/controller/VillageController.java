@@ -16,6 +16,7 @@ import nl.duckstudios.pintandpillage.service.VillageService;
 import nl.duckstudios.pintandpillage.service.WorldService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 
@@ -55,7 +56,7 @@ public class VillageController {
     }
 
     @GetMapping("/{id}")
-    public Village getVillage(@PathVariable long id) {
+    public Village getVillage(@PathVariable long id) throws EntityNotFoundException {
         User user = this.authenticationService.getAuthenticatedUser();
         Village village = this.villageService.getVillage(id);
 
@@ -81,7 +82,7 @@ public class VillageController {
 
     @RequestMapping(value = "changename/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Village changeVillageName(@PathVariable long id, @RequestBody VillageNameChangeData villageNameChangeData) {
+    public Village changeVillageName(@PathVariable long id, @RequestBody VillageNameChangeData villageNameChangeData) throws EntityNotFoundException {
         User user = this.authenticationService.getAuthenticatedUser();
         Village village = this.villageService.getVillage(id);
 
@@ -95,7 +96,7 @@ public class VillageController {
 
     @RequestMapping(value = "startNew", method = RequestMethod.POST)
     @ResponseBody
-    public Village startNewVillage(@RequestBody NewVillageData newVillageData) {
+    public Village startNewVillage(@RequestBody NewVillageData newVillageData) throws EntityNotFoundException {
         User user = this.authenticationService.getAuthenticatedUser();
         Village village = this.villageService.getVillage(newVillageData.villageId);
 

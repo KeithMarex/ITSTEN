@@ -15,6 +15,7 @@ import nl.duckstudios.pintandpillage.model.UnitType;
 import nl.duckstudios.pintandpillage.model.WorldVillage;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -36,7 +37,7 @@ public class VillageService {
         this.distanceService = distanceService;
     }
 
-    public Village getVillage(long id) {
+    public Village getVillage(long id) throws EntityNotFoundException {
         Village village = villageDataMapper.getVillage(id);
         this.updateCombatState(village);
         return village;

@@ -3,6 +3,8 @@ package nl.duckstudios.pintandpillage.dao;
 import nl.duckstudios.pintandpillage.entity.buildings.Building;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityNotFoundException;
+
 @Component
 public class BuildingDAO {
 
@@ -12,7 +14,7 @@ public class BuildingDAO {
         this.buildingRepository = buildingRepository;
     }
 
-    public Building getBuilding(long id){
-        return this.buildingRepository.findById(id);
+    public Building getBuilding(long id) throws EntityNotFoundException {
+        return this.buildingRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 }

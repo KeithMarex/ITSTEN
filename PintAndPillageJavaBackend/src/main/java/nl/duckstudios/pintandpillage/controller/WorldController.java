@@ -10,6 +10,7 @@ import nl.duckstudios.pintandpillage.service.VillageService;
 import nl.duckstudios.pintandpillage.service.WorldService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,7 @@ public class WorldController {
 
     @RequestMapping(value = "settlespots/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public SettleableSpots getSettleableSpots(@PathVariable long id) {
+    public SettleableSpots getSettleableSpots(@PathVariable long id) throws EntityNotFoundException {
         User user = this.authenticationService.getAuthenticatedUser();
 
         return this.worldService.getSettleableSpots(id, user);
