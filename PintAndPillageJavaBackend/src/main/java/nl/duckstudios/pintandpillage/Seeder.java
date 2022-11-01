@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage;
 
+import lombok.AllArgsConstructor;
 import nl.duckstudios.pintandpillage.dao.UserDAO;
 import nl.duckstudios.pintandpillage.dao.VillageDAO;
 import nl.duckstudios.pintandpillage.dao.VillageDataMapper;
@@ -24,23 +25,11 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class Seeder {
     private final UserDAO userDAO;
     private final VillageFactory villageFactory;
-
-    private final VillageDataMapper villageDataMapper;
-
     private final VillageDAO villageDAO;
-
-    private final AuthenticationService authenticationService;
-
-    public Seeder(UserDAO userDAO, VillageFactory villageFactory, VillageDataMapper villageDataMapper, VillageDAO villageDAO, AuthenticationService authenticationService) {
-        this.userDAO = userDAO;
-        this.villageFactory = villageFactory;
-        this.villageDataMapper = villageDataMapper;
-        this.villageDAO = villageDAO;
-        this.authenticationService = authenticationService;
-    }
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {

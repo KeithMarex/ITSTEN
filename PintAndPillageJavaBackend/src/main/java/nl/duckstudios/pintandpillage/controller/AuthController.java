@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.controller;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.exceptions.ForbiddenException;
 import nl.duckstudios.pintandpillage.exceptions.UnmetEmailRequirementsException;
 import nl.duckstudios.pintandpillage.exceptions.UnmetPasswordRequirementsException;
@@ -28,19 +29,13 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final UserDAO userDAO;
     private final JwtTokenUtil jwtUtil;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
-
-    public AuthController(JwtTokenUtil jwtUtil, AuthenticationManager authManager, PasswordEncoder passwordEncoder, UserDAO userDAO) {
-        this.jwtUtil = jwtUtil;
-        this.authManager = authManager;
-        this.passwordEncoder = passwordEncoder;
-        this.userDAO = userDAO;
-    }
 
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody User user) {

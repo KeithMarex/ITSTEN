@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.service;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.exceptions.AttackingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.VillageUnit;

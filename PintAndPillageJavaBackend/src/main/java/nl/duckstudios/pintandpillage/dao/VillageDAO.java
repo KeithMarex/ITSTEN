@@ -1,5 +1,6 @@
 package nl.duckstudios.pintandpillage.dao;
 
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.entity.Village;
 import org.springframework.stereotype.Component;
 
@@ -7,13 +8,10 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class VillageDAO {
 
     private VillageRepository villageRepository;
-
-    public VillageDAO(VillageRepository villageRepository) {
-        this.villageRepository = villageRepository;
-    }
 
     public Village save(Village village) {
         return this.villageRepository.save(village);
