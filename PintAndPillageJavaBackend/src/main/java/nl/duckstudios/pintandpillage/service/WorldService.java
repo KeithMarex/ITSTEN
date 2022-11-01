@@ -9,6 +9,8 @@ import nl.duckstudios.pintandpillage.entity.WorldMap;
 import nl.duckstudios.pintandpillage.model.SettleableSpots;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @RequiredArgsConstructor
 public class WorldService {
@@ -23,7 +25,7 @@ public class WorldService {
         return worldMap;
     }
 
-    public SettleableSpots getSettleableSpots(long id, User user) {
+    public SettleableSpots getSettleableSpots(long id, User user) throws EntityNotFoundException {
         final int maxRange = 5;
         Village village = this.villageDataMapper.getVillage(id);
         Coord villagePosition = new Coord(village.getPositionX(), village.getPositionY());

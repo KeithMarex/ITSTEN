@@ -12,6 +12,8 @@ import nl.duckstudios.pintandpillage.service.BuildingService;
 import nl.duckstudios.pintandpillage.service.VillageService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("api/building")
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class BuildingController {
 
     @RequestMapping(value = "/build", method = RequestMethod.POST)
     @ResponseBody
-    public Village createBuilding(@RequestBody BuildingCreateData buildingCreateData) {
+    public Village createBuilding(@RequestBody BuildingCreateData buildingCreateData) throws EntityNotFoundException {
         User user = this.authenticationService.getAuthenticatedUser();
         Village village = this.villageService.getVillage(buildingCreateData.villageId);
 

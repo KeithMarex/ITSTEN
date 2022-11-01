@@ -12,6 +12,7 @@ import nl.duckstudios.pintandpillage.model.AttackVillageData;
 import nl.duckstudios.pintandpillage.service.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CombatController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public Village attackVillage(@RequestBody AttackVillageData data) {
+    public Village attackVillage(@RequestBody AttackVillageData data) throws EntityNotFoundException {
         if (data.fromVillageId == data.toVillageId) {
             throw new AttackingConditionsNotMetException("You should not attack yourself...");
         }
