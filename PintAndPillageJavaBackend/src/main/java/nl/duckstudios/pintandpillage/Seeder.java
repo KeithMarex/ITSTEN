@@ -1,9 +1,8 @@
 package nl.duckstudios.pintandpillage;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import nl.duckstudios.pintandpillage.dao.UserDAO;
 import nl.duckstudios.pintandpillage.dao.VillageDAO;
-import nl.duckstudios.pintandpillage.dao.VillageDataMapper;
 import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.User;
 import nl.duckstudios.pintandpillage.entity.Village;
@@ -15,7 +14,6 @@ import nl.duckstudios.pintandpillage.entity.production.Spear;
 import nl.duckstudios.pintandpillage.entity.production.TransportShip;
 import nl.duckstudios.pintandpillage.helper.VillageFactory;
 import nl.duckstudios.pintandpillage.model.ResourceType;
-import nl.duckstudios.pintandpillage.service.AuthenticationService;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +23,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Seeder {
     private final UserDAO userDAO;
     private final VillageFactory villageFactory;
