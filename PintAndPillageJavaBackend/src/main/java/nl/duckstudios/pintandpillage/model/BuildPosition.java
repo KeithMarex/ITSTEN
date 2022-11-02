@@ -1,7 +1,9 @@
 package nl.duckstudios.pintandpillage.model;
 
+import lombok.ToString;
 import nl.duckstudios.pintandpillage.entity.Coord;
 
+@ToString
 public class BuildPosition {
 
     public String name = "BuildingTile";

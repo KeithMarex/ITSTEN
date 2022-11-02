@@ -13,6 +13,7 @@ import nl.duckstudios.pintandpillage.entity.production.Unit;
 import nl.duckstudios.pintandpillage.entity.researching.*;
 import nl.duckstudios.pintandpillage.entity.travels.AttackCombatTravel;
 import nl.duckstudios.pintandpillage.entity.travels.ReturningCombatTravel;
+import nl.duckstudios.pintandpillage.exceptions.BuildingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.model.BuildPosition;
 import nl.duckstudios.pintandpillage.model.ResearchType;
 import nl.duckstudios.pintandpillage.model.ResourceType;
@@ -125,6 +126,7 @@ public class Village {
 
     @OneToMany(mappedBy = "village", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
+    @Getter
     private Set<Building> buildings;
 
     @Transient
@@ -183,7 +185,7 @@ public class Village {
         this.setAvailableResearches();
     }
 
-    public void createBuilding(Building building) {
+    public void createBuilding(Building building) throws BuildingConditionsNotMetException {
         this.buildings.add(building);
         this.updateVillageState();
     }

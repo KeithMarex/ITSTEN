@@ -1,40 +1,107 @@
 package nl.duckstudios.pintandpillage;
 
+import nl.duckstudios.pintandpillage.entity.Coord;
+import nl.duckstudios.pintandpillage.entity.Village;
+import nl.duckstudios.pintandpillage.entity.buildings.House;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-//Test: Een Viking houtverwerking kunnen bouwen zodat ik meer hout resource in mijn stad krijg.
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+//Test: Bouw huizen om de populatie binnen mijn dorp te vergroten.
 @ExtendWith(MockitoExtension.class)
-@Tag("ResourceBuilding")
-public class ResourcesBuildingTest {
-//    @Mock
-//    private Village villageMock;
-//
-//    public MockedResourceBuilding mockedResourceBuildingUnderTesting;
-//
-//    private MockedResourceBuilding setupMockedResourceBuilding(Coord coord) {
-//        MockedResourceBuilding resourceBuilding = new MockedResourceBuilding();
-//        resourceBuilding.setVillage(villageMock);
-//        resourceBuilding.setLevel(1);
-//        resourceBuilding.setPosition(coord);
-//        resourceBuilding.updateBuilding();
-//        resourceBuilding.setUnderConstruction(false);
-//        resourceBuilding.setLastCollected(LocalDateTime.now());
-//
-//        return resourceBuilding;
-//    }
-//
-//    void setupLumberYardUnderTesting(){
-//        this.villageMock = new Village();
-//
-//        // so when we want to collect resources we are not limited
-//        int storageLimit = 1000000000;
-//        this.villageMock.setResourceLimit(storageLimit);
-//
-//        this.mockedResourceBuildingUnderTesting = this.setupMockedResourceBuilding(new Coord(1, 4));
-//    }
-//
+@Tag("VillagePopulation")
+public class VillagePopulationTest {
+    Village villageUnderTesting;
+
+    @Mock
+    House mockedHouse;
+
+    @Before
+    public void setup(){
+        this.villageUnderTesting = new Village();
+
+        this.mockedHouse = new House();
+        this.mockedHouse.setVillage(villageUnderTesting);
+        this.mockedHouse.setLevel(1);
+        this.mockedHouse.setPosition(new Coord(2, 2));
+        this.mockedHouse.updateBuilding();
+        this.mockedHouse.setUnderConstruction(false);
+
+        this.villageUnderTesting.createBuilding(this.mockedHouse);
+    }
+
+    private House createNewHouse(Coord coord){
+        House house = new House();
+        house.setVillage(villageUnderTesting);
+        house.setLevel(1);
+        house.setPosition(coord);
+        house.updateBuilding();
+        house.setUnderConstruction(false);
+
+        return house;
+
+    }
+
+    @Test
+    public void Should_IncreasePopulation_When_HouseHasBeenBuilt(){
+        // Act
+        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
+
+        // Arrange
+        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 5)));
+
+        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
+
+        // Assert
+        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
+        assertTrue(numberOfPopulaitionAfterANewHouseHasBeenBuilt > numberOfPopulationBeforeHouseBeingBuilt);
+    }
+
+    @Test
+    public void Should_NotIncreasePopulation_When_HouseHasBeenBuiltOnInvalidBuildingPosition(){}
+
+    @Test
+    public void Should_NotIncreasePopulation_When_UpdateMethodHasNotBeenCalled(){
+        // Act
+        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
+
+        // Arrange
+        createNewHouse(new Coord(2, 5));
+
+        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
+
+        // Assert
+        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
+        assertEquals(numberOfPopulaitionAfterANewHouseHasBeenBuilt, numberOfPopulationBeforeHouseBeingBuilt);
+    }
+
+    // Oftewel, de back-end heeft helemaal geen check of er uberhaupt wel een build gebouwd mag worden daar
+    @Test
+    public void Should_AmountOfAvailablesTilesDecrease_When_NewHouseIsBuilt(){
+        // Act
+        int numberOfAvailableBuildingTiles = Arrays.stream(this.villageUnderTesting.getValidBuildPositions()).toList().stream()
+                .filter(loc -> this.villageUnderTesting.getBuildings().stream().noneMatch(building -> building.getPosition().getX() == loc.position.getX() && building.getPosition().getY() == loc.position.getY())).toList().size();
+
+        // Arrange
+        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(11, 2)));
+
+        int numberOfAvailableBuildingTilesAfterHouseCreation = Arrays.stream(this.villageUnderTesting.getValidBuildPositions()).toList().stream()
+                .filter(loc -> this.villageUnderTesting.getBuildings().stream().noneMatch(building -> building.getPosition().getX() == loc.position.getX() && building.getPosition().getY() == loc.position.getY())).toList().size();
+
+        // Assert
+        System.out.println("Nummer voor: " + numberOfAvailableBuildingTiles + ", en erna: " + numberOfAvailableBuildingTilesAfterHouseCreation);
+        assertTrue(numberOfAvailableBuildingTilesAfterHouseCreation < numberOfAvailableBuildingTiles);
+    }
+
 //    @Test
 //    void should_IncreaseProductionResourceProduction_WhenBuild() {
 //        this.setupLumberYardUnderTesting();

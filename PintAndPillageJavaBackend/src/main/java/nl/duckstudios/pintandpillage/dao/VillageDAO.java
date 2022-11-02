@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VillageDAO {
 
-    private VillageRepository villageRepository;
+    private final VillageRepository villageRepository;
 
     public Village save(Village village) {
         return this.villageRepository.save(village);
