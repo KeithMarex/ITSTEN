@@ -46,6 +46,4 @@ public class House extends Building implements IPopulatable {
     public int getPopulationRequired(int level) {
         return 0;
     }
-
-
 }

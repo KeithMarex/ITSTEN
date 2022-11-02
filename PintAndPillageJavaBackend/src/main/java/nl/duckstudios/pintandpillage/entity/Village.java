@@ -24,6 +24,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "Villages")
@@ -297,6 +298,13 @@ public class Village {
         this.totalDefence = this.unitsInVillage.stream()
                 .mapToInt(t -> (int) (t.getUnit().getDefence() *
                         (1 + 0.1f * this.getResearchLevel(t.getUnit().getResearchRequired())) * t.getAmount())).sum();
+
+        // Custom edit: Now keeps track of the total defense with defenseTowers as well
+//        int defenceFromTowers = this.buildings.stream()
+//                .filter(building -> building instanceof DefenceTower)
+//                .mapToInt((building -> ((DefenceTower) building).getDefenceBonus())).sum();
+//
+//        this.totalDefence = defenceFromUnits + defenceFromTowers;
     }
 
     private void createBuildableBuildingsList() {
