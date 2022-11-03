@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +45,7 @@ public class BuildingSpotTest {
         harbor2.setPosition(new Coord(9, 13));
         harbor2.updateBuilding();
         harbor2.setUnderConstruction(false);
+        harbor2.setBuildingLevelRequiredToLevelup(Collections.emptyMap());
 
         // Act
 

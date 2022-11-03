@@ -67,7 +67,6 @@ public class ResourceBuildingLevelTest {
         int amountOfResourcesProducedPerHourAfterLevelUp = this.mockedResourceBuilding.getResourcesPerHour();
 
         // Assert
-        System.out.println("Nummer voor: " + amountOfResourcesProducedPerHour + ", en erna: " + amountOfResourcesProducedPerHourAfterLevelUp);
         assertTrue(amountOfResourcesProducedPerHour < amountOfResourcesProducedPerHourAfterLevelUp);
     }
 

@@ -10,12 +10,9 @@ import org.junit.Test;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,12 +53,9 @@ public class BuildingLevelTest {
 
         this.houseUnderTesting.updateBuildingState();
 
-        System.out.println(this.houseUnderTesting.getLevel());
-
         int newrequiredResourcesToLevelUp = this.houseUnderTesting.getResourcesRequiredLevelUp().values().stream().mapToInt(Integer::intValue).sum();
 
         // Assert
-        System.out.println("Nummer voor: " + requiredResourcesToLevelUp + ", en erna: " + newrequiredResourcesToLevelUp);
         assertTrue(requiredResourcesToLevelUp < newrequiredResourcesToLevelUp);
     }
 
@@ -81,7 +75,6 @@ public class BuildingLevelTest {
         int constructionTimeAfterLevelUp = (int) this.houseUnderTesting.getConstructionTimeSeconds();
 
         // Assert
-        System.out.println("Nummer voor: " + initialConstructionTime + ", en erna: " + constructionTimeAfterLevelUp);
         assertTrue(constructionTimeAfterLevelUp > initialConstructionTime);
     }
 
@@ -102,7 +95,6 @@ public class BuildingLevelTest {
         int populationCapacityOfVillageAfterBuildingUpgrade = this.villageMock.getPopulation();
 
         // Assert
-        System.out.println("Nummer voor: " + initialPopulation + ", en erna: " + populationCapacityOfVillageAfterBuildingUpgrade);
         assertTrue(initialPopulation < populationCapacityOfVillageAfterBuildingUpgrade);
     }
 
@@ -115,6 +107,12 @@ public class BuildingLevelTest {
 
         // Act
         DefenceTower defenceTower = new DefenceTower();
+        defenceTower.setVillage(this.villageMock);
+        defenceTower.setLevel(1);
+        defenceTower.setPosition(new Coord(6, 2));
+        defenceTower.updateBuilding();
+        defenceTower.setUnderConstruction(false);
+
         this.villageMock.createBuilding(defenceTower);
 
         // Custom function created since village defence points are only calculated by units

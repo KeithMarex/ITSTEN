@@ -25,7 +25,7 @@ public abstract class Building {
 
     @Getter
     @Setter
-    public String name;
+    private String name;
 
     @Transient
     protected ResourceManager resourceManager;

@@ -67,32 +67,13 @@ public class VillagePopulationTest {
         int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
 
         // Arrange
-        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 5)));
+        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 4)));
 
         int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
 
         // Assert
-        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
         assertTrue(numberOfPopulaitionAfterANewHouseHasBeenBuilt > numberOfPopulationBeforeHouseBeingBuilt);
     }
-
-    @Test
-    public void Should_NotIncreasePopulation_When_HouseHasBeenBuiltOnInvalidBuildingPosition(){}
-
-//    @Test
-//    public void Should_NotIncreasePopulation_When_UpdateMethodHasNotBeenCalled(){
-//        // Arrange
-//        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 5)));
-//        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
-//
-//        // Act
-//        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 2)));
-//        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
-//
-//        // Assert
-//        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
-//        assertEquals(numberOfPopulaitionAfterANewHouseHasBeenBuilt, numberOfPopulationBeforeHouseBeingBuilt);
-//    }
 
     @Test
     public void should_amountOfAvailableTilesDecrease_when_newHouseIsBuilt(){
@@ -105,7 +86,6 @@ public class VillagePopulationTest {
         int numberOfAvailableBuildingTilesAfterHouseCreation = numberOfAvailableBuildingTiles();
 
         // Assert
-        System.out.println("Nummer voor: " + numberOfAvailableBuildingTiles + ", en erna: " + numberOfAvailableBuildingTilesAfterHouseCreation);
         assertTrue(numberOfAvailableBuildingTilesAfterHouseCreation < numberOfAvailableBuildingTiles);
     }
 
@@ -123,121 +103,7 @@ public class VillagePopulationTest {
         int numberOfAvailableBuildingTilesAfterVillageHouseCreation = numberOfAvailableBuildingTiles();
 
         // Assert
-        System.out.println("Nummer voor: " + initialPopulation + ", en erna: " + populationAfterBuildingVikingHouse);
-        System.out.println("Nummer voor: " + numberOfAvailableBuildingTiles + ", en erna: " + numberOfAvailableBuildingTilesAfterVillageHouseCreation);
         assertTrue(numberOfAvailableBuildingTiles > numberOfAvailableBuildingTilesAfterVillageHouseCreation);
         assertEquals(initialPopulation, populationAfterBuildingVikingHouse);
     }
-
-//    @Test
-//    void should_IncreaseProductionResourceProduction_WhenBuild() {
-//        this.setupLumberYardUnderTesting();
-//        // Arrange
-//        int expectedResourcesPerHour = 532; // 500 extra because that is the starting value
-//
-//        // Act
-//
-//        // reset to an hour back, so we can collect an hour of resources
-//        LocalDateTime hourSystemTimeBack = LocalDateTime.now().minusHours(1);
-//        this.mockedResourceBuildingUnderTesting.setLastCollected(hourSystemTimeBack);
-//        this.mockedResourceBuildingUnderTesting.collectResources();
-//
-//        // Assert
-//        Map<String, Integer> currentResources =  this.villageMock.getVillageResources();
-//        int actualResources = currentResources.get(MockedResourceBuilding.resourceName);
-//
-//        assertThat(actualResources, is(expectedResourcesPerHour));
-//    }
-//
-//    @Test
-//    void should_IncreaseProductionResourceProduction_WhenWaitingMultipleHours() {
-//        // Arrange
-//        this.setupLumberYardUnderTesting();
-//        int expectedResourcesPerHour = 596; // 500 extra because that is the starting value
-//
-//        // Act
-//
-//        // collect 3 hours of resources
-//        LocalDateTime hourSystemTimeBack = LocalDateTime.now().minusHours(3);
-//        this.mockedResourceBuildingUnderTesting.setLastCollected(hourSystemTimeBack);
-//        this.mockedResourceBuildingUnderTesting.collectResources();
-//
-//        // Assert
-//        Map<String, Integer> currentResources =  this.villageMock.getVillageResources();
-//        int actualResources = currentResources.get(MockedResourceBuilding.resourceName);
-//
-//        assertThat(actualResources, is(expectedResourcesPerHour));
-//    }
-//
-//    @Test
-//    void should_IncreaseProductionWoodProduction_WhenWaitingMultipleHoursWithHigherLevel() {
-//        // Arrange
-//        this.setupLumberYardUnderTesting();
-//
-//        int buildingLevel = 10;
-//        this.mockedResourceBuildingUnderTesting.setLevel(buildingLevel); // upgrade to level 10
-//        this.mockedResourceBuildingUnderTesting.updateBuilding();
-//        this.mockedResourceBuildingUnderTesting.setUnderConstruction(false);
-//        int expectedResourcesPerHour = 1130; // 500 extra because that is the starting value
-//
-//        // Act
-//
-//        // collect 3 hours of resources
-//        LocalDateTime hourSystemTimeBack = LocalDateTime.now().minusHours(3);
-//        this.mockedResourceBuildingUnderTesting.setLastCollected(hourSystemTimeBack);
-//        this.mockedResourceBuildingUnderTesting.collectResources();
-//
-//        // Assert
-//        Map<String, Integer> currentResources =  this.villageMock.getVillageResources();
-//        int actualResources = currentResources.get(MockedResourceBuilding.resourceName);
-//
-//        assertThat(actualResources, is(expectedResourcesPerHour));
-//    }
-//
-//    @Test
-//    void should_IncreaseProductionWoodProduction_WithMultipleLumberyards() {
-//        // Arrange
-//        this.setupLumberYardUnderTesting();
-//        int expectedResourcesPerHour = 788; // 500 extra because that is the starting value
-//
-//        // setup 2 more lumberyards to increase production
-//        ResourceBuilding secondMockedResourceBuilding = this.setupMockedResourceBuilding(new Coord(2, 2));
-//        ResourceBuilding thirdMockedResourceBuilding = this.setupMockedResourceBuilding(new Coord(9, 4));
-//
-//        // Act
-//
-//        // collect 3 hours of resources
-//        LocalDateTime hourSystemTimeBack = LocalDateTime.now().minusHours(3);
-//        this.mockedResourceBuildingUnderTesting.setLastCollected(hourSystemTimeBack);
-//        this.mockedResourceBuildingUnderTesting.collectResources();
-//
-//        secondMockedResourceBuilding.setLastCollected(hourSystemTimeBack);
-//        secondMockedResourceBuilding.collectResources();
-//
-//        thirdMockedResourceBuilding.setLastCollected(hourSystemTimeBack);
-//        thirdMockedResourceBuilding.collectResources();
-//
-//        // Assert
-//        Map<String, Integer> currentResources = this.villageMock.getVillageResources();
-//        int actualResources = currentResources.get(MockedResourceBuilding.resourceName);
-//
-//        assertThat(actualResources, is(expectedResourcesPerHour));
-//    }
-//
-//    @Test
-//    void should_NotIncreaseWoodProduction_WhenNotBuild() {
-//        this.villageMock = new Village();
-//        int expectedResourcesPerHour = 500; // default wood
-//
-//        // Act
-//
-//        // collect 3 hours of resources, even though  we don't have any resources
-//        this.villageMock.updateVillageState();
-//
-//        // Assert
-//        Map<String, Integer> currentResources = this.villageMock.getVillageResources();
-//        int actualResources = currentResources.get(MockedResourceBuilding.resourceName);
-//
-//        assertThat(actualResources, is(expectedResourcesPerHour));
-//    }
 }

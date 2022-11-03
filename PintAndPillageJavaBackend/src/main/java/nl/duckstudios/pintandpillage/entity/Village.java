@@ -200,8 +200,30 @@ public class Village {
                 })
                 .findFirst().orElseThrow(() -> new BuildingConditionsNotMetException("Not a valid build position!"));
 
+        this.checkIfBuildingCanBeBuild(building);
+
         this.buildings.add(building);
         this.updateVillageState();
+    }
+
+    public void checkIfBuildingCanBeBuild(Building building) throws BuildingConditionsNotMetException {
+        // Get required buildings
+        Map<String, Integer> requiredBuildingsLevel = building.getBuildingLevelRequiredToLevelup();
+
+        // Check if they exist
+        Map<String, Integer> buildingsWithLevelInVillage = this.buildings.stream().collect(Collectors.toMap(Building::getName, Building::getLevel));
+
+
+        // if exist and level is under needed level throw exception
+        for (Map.Entry<String, Integer> buildingInForLoop: requiredBuildingsLevel.entrySet()){
+            if (buildingsWithLevelInVillage.containsKey(buildingInForLoop.getKey())){
+                if (buildingsWithLevelInVillage.get(buildingInForLoop.getKey()) < buildingInForLoop.getValue()){
+                    throw new BuildingConditionsNotMetException("Village does not meet the required buildings with their level to build this building.");
+                }
+            } else {
+                throw new BuildingConditionsNotMetException("Village does not meet the required buildings with their level to build this building.");
+            }
+        }
     }
 
     public void updateVillageState() {
