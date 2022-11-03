@@ -187,6 +187,19 @@ public class Village {
     }
 
     public void createBuilding(Building building) throws BuildingConditionsNotMetException {
+        BuildPosition buildPosition = Arrays.stream(this.validBuildPositions)
+                .filter(pos -> pos.position.getX() == building.getPosition().getX() && pos.position.getY() == building.getPosition().getY()).findFirst().orElseThrow(() -> new BuildingConditionsNotMetException("No valid build position on coordinates!"));
+
+        BuildPosition validBuildPosition = Stream.of(buildPosition)
+                .filter(pos -> {
+                    if (pos.allowedBuilding != null){
+                        return pos.allowedBuilding.equals(building.getName());
+                    }
+
+                    return true;
+                })
+                .findFirst().orElseThrow(() -> new BuildingConditionsNotMetException("Not a valid build position!"));
+
         this.buildings.add(building);
         this.updateVillageState();
     }

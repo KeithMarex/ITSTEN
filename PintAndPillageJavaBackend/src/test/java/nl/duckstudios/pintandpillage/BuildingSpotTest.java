@@ -4,6 +4,7 @@ import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.Harbor;
 import nl.duckstudios.pintandpillage.entity.buildings.House;
+import nl.duckstudios.pintandpillage.exceptions.BuildingConditionsNotMetException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Tag;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("BuildingSpot")
@@ -31,15 +32,22 @@ public class BuildingSpotTest {
         Harbor harbor = new Harbor();
         harbor.setVillage(this.villageUnderTesting);
         harbor.setLevel(1);
-        harbor.setPosition(new Coord(2, 2));
+        harbor.setPosition(new Coord(333, 7));
         harbor.updateBuilding();
         harbor.setUnderConstruction(false);
 
+        Harbor harbor2 = new Harbor();
+        harbor2.setVillage(this.villageUnderTesting);
+        harbor2.setLevel(1);
+        harbor2.setPosition(new Coord(9, 13));
+        harbor2.updateBuilding();
+        harbor2.setUnderConstruction(false);
+
         // Act
-        this.villageUnderTesting.createBuilding(harbor);
 
         // Assert
-        assertTrue(true);
+        assertThrows(BuildingConditionsNotMetException.class, () -> this.villageUnderTesting.createBuilding(harbor));
+        assertDoesNotThrow(() -> this.villageUnderTesting.createBuilding(harbor2));
     }
 
 }

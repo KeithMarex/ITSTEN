@@ -71,7 +71,6 @@ public class VillagePopulationTest {
 
         int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
 
-
         // Assert
         System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
         assertTrue(numberOfPopulaitionAfterANewHouseHasBeenBuilt > numberOfPopulationBeforeHouseBeingBuilt);
