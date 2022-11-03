@@ -59,7 +59,11 @@ public class ResourceBuildingLevelTest {
 
         // Act
         this.mockedResourceBuilding.levelUp();
-        this.mockedResourceBuilding.updateBuilding();
+
+        // To mock the completion of a level up
+        this.mockedResourceBuilding.setLevelupFinishedTime(LocalDateTime.now().minusSeconds(5));
+
+        this.mockedResourceBuilding.updateBuildingState();
         int amountOfResourcesProducedPerHourAfterLevelUp = this.mockedResourceBuilding.getResourcesPerHour();
 
         // Assert

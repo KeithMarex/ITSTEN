@@ -69,7 +69,8 @@ public class VillagePopulationTest {
         // Arrange
         this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 5)));
 
-        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
+        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
+
 
         // Assert
         System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
@@ -79,31 +80,31 @@ public class VillagePopulationTest {
     @Test
     public void Should_NotIncreasePopulation_When_HouseHasBeenBuiltOnInvalidBuildingPosition(){}
 
-    @Test
-    public void Should_NotIncreasePopulation_When_UpdateMethodHasNotBeenCalled(){
-        // Act
-        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 2)));
-        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
-
-        // Arrange
-        createNewHouse(new Coord(2, 5));
-
-        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
-
-        // Assert
-        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
-        assertEquals(numberOfPopulaitionAfterANewHouseHasBeenBuilt, numberOfPopulationBeforeHouseBeingBuilt);
-    }
+//    @Test
+//    public void Should_NotIncreasePopulation_When_UpdateMethodHasNotBeenCalled(){
+//        // Arrange
+//        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 5)));
+//        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
+//
+//        // Act
+//        this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 2)));
+//        int numberOfPopulaitionAfterANewHouseHasBeenBuilt = this.villageUnderTesting.getPopulation();
+//
+//        // Assert
+//        System.out.println("Nummer voor: " + numberOfPopulationBeforeHouseBeingBuilt + ", en erna: " + numberOfPopulaitionAfterANewHouseHasBeenBuilt);
+//        assertEquals(numberOfPopulaitionAfterANewHouseHasBeenBuilt, numberOfPopulationBeforeHouseBeingBuilt);
+//    }
 
     // Oftewel, de back-end heeft helemaal geen check of er uberhaupt wel een build gebouwd mag worden daar
     @Test
     public void should_amountOfAvailableTilesDecrease_when_newHouseIsBuilt(){
         // Arrange
+        int numberOfAvailableBuildingTiles = numberOfAvailableBuildingTiles();
+
+        // Act
         this.villageUnderTesting.createBuilding(createNewHouse(new Coord(11, 2)));
 
         int numberOfAvailableBuildingTilesAfterHouseCreation = numberOfAvailableBuildingTiles();
-        // Act
-        int numberOfAvailableBuildingTiles = numberOfAvailableBuildingTiles();
 
         // Assert
         System.out.println("Nummer voor: " + numberOfAvailableBuildingTiles + ", en erna: " + numberOfAvailableBuildingTilesAfterHouseCreation);

@@ -10,8 +10,10 @@ import org.junit.Test;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +50,11 @@ public class BuildingLevelTest {
 
         // Act
         this.houseUnderTesting.levelUp();
-        this.houseUnderTesting.updateBuilding();
+
+        // To mock the completion of a level up
+        this.houseUnderTesting.setLevelupFinishedTime(LocalDateTime.now().minusSeconds(5));
+
+        this.houseUnderTesting.updateBuildingState();
 
         System.out.println(this.houseUnderTesting.getLevel());
 
@@ -60,13 +66,17 @@ public class BuildingLevelTest {
     }
 
     @Test
-    public void should_requireMoreConstructionTime_when_buildingHasNewLevel(){
+    public void should_requireMoreConstructionTime_when_buildingHasNewLevel() throws InterruptedException {
         // Arrange
         int initialConstructionTime = (int) this.houseUnderTesting.getConstructionTimeSeconds();
 
         // Act
         this.houseUnderTesting.levelUp();
-        this.houseUnderTesting.updateBuilding();
+
+        // To mock the completion of a level up
+        this.houseUnderTesting.setLevelupFinishedTime(LocalDateTime.now().minusSeconds(5));
+
+        this.houseUnderTesting.updateBuildingState();
 
         int constructionTimeAfterLevelUp = (int) this.houseUnderTesting.getConstructionTimeSeconds();
 
@@ -82,7 +92,11 @@ public class BuildingLevelTest {
 
         // Act
         this.houseUnderTesting.levelUp();
-        this.houseUnderTesting.updateBuilding();
+
+        // To mock the completion of a level up
+        this.houseUnderTesting.setLevelupFinishedTime(LocalDateTime.now().minusSeconds(5));
+
+        this.houseUnderTesting.updateBuildingState();
         this.villageMock.updateVillageState();
 
         int populationCapacityOfVillageAfterBuildingUpgrade = this.villageMock.getPopulation();

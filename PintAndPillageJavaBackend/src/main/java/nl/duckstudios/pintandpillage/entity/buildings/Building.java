@@ -123,9 +123,6 @@ public abstract class Building {
         this.levelupFinishedTime = LocalDateTime.now().plusSeconds(this.constructionTimeSeconds);
         this.isUnderConstruction = true;
         this.resourceManager.subtractResources(this.village, this.resourcesRequiredLevelUp);
-
-        // Custom added
-        this.setLevel(this.level + 1);
     }
 
     public void updateBuildingState() {
