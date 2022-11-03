@@ -94,7 +94,6 @@ public class VillagePopulationTest {
 //        assertEquals(numberOfPopulaitionAfterANewHouseHasBeenBuilt, numberOfPopulationBeforeHouseBeingBuilt);
 //    }
 
-    // Oftewel, de back-end heeft helemaal geen check of er uberhaupt wel een build gebouwd mag worden daar
     @Test
     public void should_amountOfAvailableTilesDecrease_when_newHouseIsBuilt(){
         // Arrange

@@ -4,6 +4,7 @@ import nl.duckstudios.pintandpillage.entity.Coord;
 import nl.duckstudios.pintandpillage.entity.Village;
 import nl.duckstudios.pintandpillage.entity.buildings.Harbor;
 import nl.duckstudios.pintandpillage.entity.buildings.House;
+import nl.duckstudios.pintandpillage.entity.buildings.Wall;
 import nl.duckstudios.pintandpillage.exceptions.BuildingConditionsNotMetException;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,30 @@ public class BuildingSpotTest {
         // Assert
         assertThrows(BuildingConditionsNotMetException.class, () -> this.villageUnderTesting.createBuilding(harbor));
         assertDoesNotThrow(() -> this.villageUnderTesting.createBuilding(harbor2));
+    }
+
+    @Test
+    public void should_buildWall_when_validBuildingPositionHasBeenChosen(){
+        // Arrange
+        Wall wall = new Wall();
+        wall.setVillage(this.villageUnderTesting);
+        wall.setLevel(1);
+        wall.setPosition(new Coord(0, 0));
+        wall.updateBuilding();
+        wall.setUnderConstruction(false);
+
+        Wall wall2 = new Wall();
+        wall2.setVillage(this.villageUnderTesting);
+        wall2.setLevel(1);
+        wall2.setPosition(new Coord(3, 4));
+        wall2.updateBuilding();
+        wall2.setUnderConstruction(false);
+
+        // Act
+
+        // Assert
+        assertDoesNotThrow(() -> this.villageUnderTesting.createBuilding(wall));
+        assertThrows(BuildingConditionsNotMetException.class, () -> this.villageUnderTesting.createBuilding(wall2));
     }
 
 }
