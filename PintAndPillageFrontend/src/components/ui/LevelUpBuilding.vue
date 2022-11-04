@@ -15,8 +15,8 @@
                 </div>
             </div>
             <div v-else class="underConstruction">
-                <time-frame :required-time="currentBuilding.constructionTimeLeft"></time-frame>
-                <p>Building is under construction</p>
+                <time-frame id="building-time-left" :required-time="currentBuilding.constructionTimeLeft"></time-frame>
+                <p id="building-under-construction">Building is under construction!</p>
             </div>
 
         </div>

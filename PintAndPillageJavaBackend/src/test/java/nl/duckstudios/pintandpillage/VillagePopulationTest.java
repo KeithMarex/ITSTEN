@@ -69,10 +69,10 @@ public class VillagePopulationTest {
         // Arrange
         this.villageUnderTesting.createBuilding(createNewHouse(new Coord(2, 4)));
 
-        int numberOfPopulationBeforeHouseBeingBuilt = this.villageUnderTesting.getPopulation();
+        int numberOfPopulationAfterHouseBeingBuilt = this.villageUnderTesting.getPopulation();
 
         // Assert
-        assertTrue(numberOfPopulaitionAfterANewHouseHasBeenBuilt > numberOfPopulationBeforeHouseBeingBuilt);
+        assertTrue(numberOfPopulationAfterHouseBeingBuilt > numberOfPopulationBeforeHouseBeingBuilt);
     }
 
     @Test
