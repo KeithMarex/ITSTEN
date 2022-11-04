@@ -54,7 +54,7 @@ public class VillageDataMapper {
                     village.getUser().getUsername(),
                     new Coord(village.getPositionX(), village.getPositionY()),
                     village.getName(),
-                    village.getUser().getId(),
+                    Math.toIntExact(village.getUser().getId()),
                     village.getVillagePoints()
             ));
         }
