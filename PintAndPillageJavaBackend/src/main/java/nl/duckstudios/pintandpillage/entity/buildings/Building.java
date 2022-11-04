@@ -23,8 +23,12 @@ import java.util.Map;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Building {
 
+    @Getter
+    @Setter
+    private String name;
+
     @Transient
-    protected final ResourceManager resourceManager;
+    protected ResourceManager resourceManager;
     @Getter
     @Setter
     @Id

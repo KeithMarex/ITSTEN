@@ -13,6 +13,7 @@ import nl.duckstudios.pintandpillage.entity.production.Unit;
 import nl.duckstudios.pintandpillage.entity.researching.*;
 import nl.duckstudios.pintandpillage.entity.travels.AttackCombatTravel;
 import nl.duckstudios.pintandpillage.entity.travels.ReturningCombatTravel;
+import nl.duckstudios.pintandpillage.exceptions.BuildingConditionsNotMetException;
 import nl.duckstudios.pintandpillage.model.BuildPosition;
 import nl.duckstudios.pintandpillage.model.ResearchType;
 import nl.duckstudios.pintandpillage.model.ResourceType;
@@ -23,6 +24,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "Villages")
@@ -125,6 +127,7 @@ public class Village {
 
     @OneToMany(mappedBy = "village", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
+    @Getter
     private Set<Building> buildings;
 
     @Transient
@@ -183,9 +186,44 @@ public class Village {
         this.setAvailableResearches();
     }
 
-    public void createBuilding(Building building) {
+    public void createBuilding(Building building) throws BuildingConditionsNotMetException {
+        BuildPosition buildPosition = Arrays.stream(this.validBuildPositions)
+                .filter(pos -> pos.position.getX() == building.getPosition().getX() && pos.position.getY() == building.getPosition().getY()).findFirst().orElseThrow(() -> new BuildingConditionsNotMetException("No valid build position on coordinates!"));
+
+        BuildPosition validBuildPosition = Stream.of(buildPosition)
+                .filter(pos -> {
+                    if (pos.allowedBuilding != null){
+                        return pos.allowedBuilding.equals(building.getName());
+                    }
+
+                    return true;
+                })
+                .findFirst().orElseThrow(() -> new BuildingConditionsNotMetException("Not a valid build position!"));
+
+        this.checkIfBuildingCanBeBuild(building);
+
         this.buildings.add(building);
         this.updateVillageState();
+    }
+
+    public void checkIfBuildingCanBeBuild(Building building) throws BuildingConditionsNotMetException {
+        // Get required buildings
+        Map<String, Integer> requiredBuildingsLevel = building.getBuildingLevelRequiredToLevelup();
+
+        // Check if they exist
+        Map<String, Integer> buildingsWithLevelInVillage = this.buildings.stream().collect(Collectors.toMap(Building::getName, Building::getLevel));
+
+
+        // if exist and level is under needed level throw exception
+        for (Map.Entry<String, Integer> buildingInForLoop: requiredBuildingsLevel.entrySet()){
+            if (buildingsWithLevelInVillage.containsKey(buildingInForLoop.getKey())){
+                if (buildingsWithLevelInVillage.get(buildingInForLoop.getKey()) < buildingInForLoop.getValue()){
+                    throw new BuildingConditionsNotMetException("Village does not meet the required buildings with their level to build this building.");
+                }
+            } else {
+                throw new BuildingConditionsNotMetException("Village does not meet the required buildings with their level to build this building.");
+            }
+        }
     }
 
     public void updateVillageState() {
@@ -295,6 +333,13 @@ public class Village {
         this.totalDefence = this.unitsInVillage.stream()
                 .mapToInt(t -> (int) (t.getUnit().getDefence() *
                         (1 + 0.1f * this.getResearchLevel(t.getUnit().getResearchRequired())) * t.getAmount())).sum();
+
+        // Custom edit: Now keeps track of the total defense with defenseTowers as well
+//        int defenceFromTowers = this.buildings.stream()
+//                .filter(building -> building instanceof DefenceTower)
+//                .mapToInt((building -> ((DefenceTower) building).getDefenceBonus())).sum();
+//
+//        this.totalDefence = defenceFromUnits + defenceFromTowers;
     }
 
     private void createBuildableBuildingsList() {
