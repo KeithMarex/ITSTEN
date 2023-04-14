@@ -4,7 +4,7 @@
             <div class="loginInputBox">
                 <input class="inputField" type="text" v-model.trim="username" placeholder="Username"/>
                 <input class="inputField" type="password" v-model.trim="password" placeholder="Password"/>
-                <a class="redirects" @click="updateRoute('ResetPassword')">Reset password</a>
+                <a id="resPass" class="redirects" @click="updateRoute('ResetPassword')">Reset password</a>
                 <a class="redirects" @click="updateRoute('Register')" id="create-account">Create new account</a>
                 <button class="submitButton" type="submit" @click="login">Login</button>
             </div>
